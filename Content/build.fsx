@@ -56,20 +56,24 @@ Target "DotnetBuild" (fun _ ->
 ))
 
 
+let fableWebpack workingDir =
+    DotNetCli.RunCommand(fun c ->
+        {c with WorkingDir = workingDir }
+        ) "fable webpack"
+
+let mocha args =
+    if ProcessHelper.Shell.Exec("./node_modules/.bin/mocha", args ) <> 0 then failwith "Mocha test failed"
+
 Target "MochaTest" (fun _ ->
     !! testsGlob
     |> Seq.iter(fun proj ->
         let projDir = proj |> DirectoryName
         //Compile to JS
-        DotNetCli.RunCommand(fun c ->
-            {c with WorkingDir = projDir }
-            ) "fable webpack"
-        let projDirOutput = projDir </> "bin"
-        if ProcessHelper.Shell.Exec("./node_modules/.bin/mocha", projDirOutput ) <> 0 then failwith "Mocha test failed"
+        fableWebpack projDir
 
-        // NpmHelper.Npm (fun p ->
-        //     { p with Command = NpmHelper.NpmCommand.Test }
-        // )
+        //Run mocha tests
+        let projDirOutput = projDir </> "bin"
+        mocha projDirOutput
     )
 
 )
