@@ -4,10 +4,12 @@ open Fake.Git
 open Fake.AssemblyInfoFile
 open Fake.ReleaseNotesHelper
 open Fake.UserInputHelper
+open Fake.YarnHelper
 open System
 
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
 let srcGlob = "src/**/*.fsproj"
+let testsGlob = "tests/**/*.fsproj"
 
 Target "Clean" (fun _ ->
     ["bin"; "temp" ;"dist"]
@@ -23,8 +25,16 @@ Target "Clean" (fun _ ->
 
     )
 
+Target "YarnInstall"(fun _ ->
+    Yarn (fun p ->
+        { p with
+            Command = Install Standard
+        })
+)
+
 Target "DotnetRestore" (fun _ ->
     !! srcGlob
+    ++ testsGlob
     |> Seq.iter (fun proj ->
         DotNetCli.Restore (fun c ->
             { c with
@@ -44,6 +54,25 @@ Target "DotnetBuild" (fun _ ->
                 AdditionalArgs = [sprintf "/p:PackageVersion=%s" release.NugetVersion]
             })
 ))
+
+
+Target "MochaTest" (fun _ ->
+    !! testsGlob
+    |> Seq.iter(fun proj ->
+        let projDir = proj |> DirectoryName
+        //Compile to JS
+        DotNetCli.RunCommand(fun c ->
+            {c with WorkingDir = projDir }
+            ) "fable webpack"
+        let projDirOutput = projDir </> "bin"
+        if ProcessHelper.Shell.Exec("./node_modules/.bin/mocha", projDirOutput ) <> 0 then failwith "Mocha test failed"
+
+        // NpmHelper.Npm (fun p ->
+        //     { p with Command = NpmHelper.NpmCommand.Test }
+        // )
+    )
+
+)
 
 Target "DotnetPack" (fun _ ->
     !! srcGlob
@@ -84,8 +113,10 @@ Target "Release" (fun _ ->
 )
 
 "Clean"
+  ==> "YarnInstall"
   ==> "DotnetRestore"
   ==> "DotnetBuild"
+  ==> "MochaTest"
   ==> "DotnetPack"
   ==> "Publish"
   ==> "Release"
