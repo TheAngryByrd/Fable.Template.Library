@@ -1,0 +1,9 @@
+source https://www.nuget.org/api/v2
+
+nuget FSharp.Core  redirects:force, content:none
+nuget Fable.Core
+nuget Fable.PowerPack
+
+group Build
+    source https://www.nuget.org/api/v2
+    nuget FAKE

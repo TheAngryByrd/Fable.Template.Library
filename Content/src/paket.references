@@ -1,0 +1,3 @@
+nuget FSharp.Core  redirects:force, content:none
+nuget Fable.Core
+nuget Fable.PowerPack

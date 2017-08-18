@@ -1,0 +1,19 @@
+{
+    "author": "Jimmy Byrd",
+    "classifications": ["Scaffold"],
+    "name": "Fable.Library.Template",
+    "tags": {
+        "language": "F#"
+    },
+    "identity": "Fable.Library.Template",
+    "shortName": "fable-library",
+    "sourceName": "MyLib",
+    // This allows using the `-n` option to create a new directory
+    "preferNameDirectory": true,
+    "symbols": {
+        "githubUsername": {
+            "type": "parameter",
+            "replaces": "MyGithubUsername"
+        }
+    }
+}

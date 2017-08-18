@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Fable Library Template</Description>
+    <Authors>Jimmy Byrd</Authors>
+    <PackageProjectUrl>https://github.com/TheAngryByrd/Fable.Library.Template</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/TheAngryByrd/Fable.Library.Template/blob/master/LICENSE.md</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/TheAngryByrd/Fable.Library.Template.git</RepositoryUrl>
+    <PackageTags>class;library;template;fsharp</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageType>Template</PackageType>
+
+    <NoBuild>true</NoBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Content/**/*" Exclude="Content/packages/**/*;Content/.fake/**;Content/bin/**/**/*;Content/dist/*;Content/temp/*;Content/**/bin/**/**/*;Content/**/obj/**/**/*" >
+        <PackagePath>Content\</PackagePath>
+    </Content>
+  </ItemGroup>
+</Project>
