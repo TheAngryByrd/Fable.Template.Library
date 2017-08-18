@@ -1,3 +1,4 @@
-nuget FSharp.Core  redirects:force, content:none
-nuget Fable.Core
-nuget Fable.PowerPack
+FSharp.Core
+Fable.Core
+FSharp.NET.Sdk
+dotnet-fable

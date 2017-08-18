@@ -1,14 +1,11 @@
 module Fable.MyLib
 
-open System
 open Fable.Core
-open Fable.PowerPack
+
+(************************************************)
+(*     You should remove the next lines and     *)
+(*    start writing your library in this file   *)
+(************************************************)
 
 [<Emit("$0 + $1")>]
 let add (x: int) (y: int) = jsNative
-
-[<Import("parseJson", "./custom.js")>]
-let parseJson : string -> obj option = jsNative
-
-
-let foo () = 3
