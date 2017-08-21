@@ -2,7 +2,6 @@ source https://www.nuget.org/api/v2
 
 nuget FSharp.Core  redirects:force, content:none
 nuget Fable.Core
-nuget FSharp.NET.Sdk
 
 clitool dotnet-fable
 
