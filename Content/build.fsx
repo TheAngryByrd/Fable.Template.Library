@@ -50,7 +50,7 @@ module Logger =
 
 
 Target "Clean" (fun _ ->
-    ["bin"; "temp" ;"dist"]
+    ["bin"]
     |> CleanDirs
 
     !! srcGlob
@@ -88,8 +88,6 @@ Target "DotnetBuild" (fun _ ->
         DotNetCli.Build (fun c ->
             { c with
                 Project = proj
-                //This makes sure that Proj2 references the correct version of Proj1
-                AdditionalArgs = [sprintf "/p:PackageVersion=%s" release.NugetVersion]
             })
 ))
 
@@ -125,7 +123,6 @@ Target "DotnetPack" (fun _ ->
                 Configuration = "Release"
                 AdditionalArgs =
                     [
-                        sprintf "/p:PackageVersion=%s" release.NugetVersion
                         sprintf "/p:PackageReleaseNotes=\"%s\"" (String.Join("\n",release.Notes))
                     ]
             })
