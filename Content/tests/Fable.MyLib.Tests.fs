@@ -1,11 +1,7 @@
 module Fable.MyLib.Tests
 
-
-open System
 open Fable.Core
 open Fable.Core.JsInterop
-open Fable.Import
-open Fable.PowerPack.Json
 open Fable.MyLib
 
 let inline equal (expected: 'T) (actual: 'T): unit =
