@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Fable Library Template</Description>
+    <Description>Fable Template for Libraries</Description>
     <Authors>Jimmy Byrd</Authors>
     <PackageProjectUrl>https://github.com/TheAngryByrd/Fable.Library.Template</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/TheAngryByrd/Fable.Library.Template/blob/master/LICENSE.md</PackageLicenseUrl>
