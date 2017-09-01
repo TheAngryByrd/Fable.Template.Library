@@ -47,4 +47,7 @@ pushd Content/
 ./build.sh Clean
 popd
 
+rm -rf Content/node_modules
+rm -rf Content/packages
+
 run $FAKE_EXE "$@" $FSIARGS $FSIARGS2 build.fsx
