@@ -7,7 +7,7 @@ F# Template for create and publishing [Fable](https://github.com/fable-compiler/
 ### Grab the template from nuget:
 
 ```
-dotnet new -i "Fable.Library.Template::*"
+dotnet new -i "Fable.Template.Library::*"
 ```
 
 ### Use the new template:
