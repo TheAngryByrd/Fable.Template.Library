@@ -1,4 +1,5 @@
-# Fable.MyLib
+# Fable.Fable.MyLib
+
 
 ## How to use this templates ?
 
@@ -27,3 +28,19 @@ Ex:
   - push a git tag
 
 `./build.sh Release`
+
+
+
+MacOS/Linux | Windows
+--- | ---
+[![Travis Badge](https://travis-ci.org/MyGithubUsername/Fable.MyLib.svg?branch=master)](https://travis-ci.org/MyGithubUsername/Fable.MyLib) | [![Build status](https://ci.appveyor.com/api/projects/status/github/MyGithubUsername/Fable.MyLib?svg=true)](https://ci.appveyor.com/project/MyGithubUsername/Fable.MyLib)
+[![Build History](https://buildstats.info/travisci/chart/MyGithubUsername/Fable.MyLib)](https://travis-ci.org/MyGithubUsername/Fable.MyLib/builds) | [![Build History](https://buildstats.info/appveyor/chart/MyGithubUsername/Fable.MyLib)](https://ci.appveyor.com/project/MyGithubUsername/Fable.MyLib)
+
+
+## Nuget
+
+Stable | Prerelease
+--- | ---
+[![NuGet Badge](https://buildstats.info/nuget/Fable.MyLib)](https://www.nuget.org/packages/Fable.MyLib/) | [![NuGet Badge](https://buildstats.info/nuget/Fable.MyLib?includePreReleases=true)](https://www.nuget.org/packages/Fable.MyLib/)
+
+

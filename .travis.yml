@@ -1,0 +1,16 @@
+language: csharp
+sudo: required
+dist: trusty
+
+dotnet: 1.0.4
+mono:
+  - 5.2.0
+  - latest # => "stable release"
+
+os:
+  - linux
+
+script:
+  - ./build.sh
+
+

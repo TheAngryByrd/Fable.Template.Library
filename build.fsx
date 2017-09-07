@@ -8,7 +8,6 @@ open System
 
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
 let srcGlob = "*.csproj"
-// let testsGlob = "tests/**/*.fsproj"
 
 
 Target "Clean" (fun _ ->
@@ -22,8 +21,6 @@ Target "DotnetRestore" (fun _ ->
         DotNetCli.Restore (fun c ->
             { c with
                 Project = proj
-                //This makes sure that Proj2 references the correct version of Proj1
-                AdditionalArgs = [sprintf "/p:PackageVersion=%s" release.NugetVersion]
             })
 ))
 
