@@ -14,6 +14,10 @@ open System.Text.RegularExpressions
 System.Console.OutputEncoding <- System.Text.Encoding.UTF8
 #endif
 
+let dotnetcliVersion = "1.0.4"
+
+let mutable dotnetExePath = "dotnet"
+
 let release = LoadReleaseNotes "RELEASE_NOTES.md"
 let srcGlob = "src/**/*.fsproj"
 let testsGlob = "tests/**/*.fsproj"
@@ -63,6 +67,10 @@ Target "Clean" (fun _ ->
 
     )
 
+Target "InstallDotNetCore" (fun _ ->
+   dotnetExePath <- DotNetCli.InstallDotNetSDK dotnetcliVersion
+)
+
 Target "YarnInstall"(fun _ ->
     Yarn (fun p ->
         { p with
@@ -77,6 +85,7 @@ Target "DotnetRestore" (fun _ ->
         DotNetCli.Restore (fun c ->
             { c with
                 Project = proj
+                ToolPath = dotnetExePath
                 //This makes sure that Proj2 references the correct version of Proj1
                 AdditionalArgs = [sprintf "/p:PackageVersion=%s" release.NugetVersion]
             })
@@ -88,13 +97,15 @@ Target "DotnetBuild" (fun _ ->
         DotNetCli.Build (fun c ->
             { c with
                 Project = proj
+                ToolPath = dotnetExePath
             })
 ))
 
 
 let fableWebpack workingDir =
     DotNetCli.RunCommand(fun c ->
-        {c with WorkingDir = workingDir }
+        { c with WorkingDir = workingDir
+                 ToolPath = dotnetExePath }
         ) "fable webpack --port free"
 
 let mocha args =
@@ -121,8 +132,10 @@ Target "DotnetPack" (fun _ ->
             { c with
                 Project = proj
                 Configuration = "Release"
+                ToolPath = dotnetExePath
                 AdditionalArgs =
                     [
+                        sprintf "/p:PackageVersion=%s" release.NugetVersion
                         sprintf "/p:PackageReleaseNotes=\"%s\"" (String.Join("\n",release.Notes))
                     ]
             })
@@ -163,7 +176,8 @@ Target "Publish" (fun _ ->
         |> (fun nupkg ->
             (Path.GetFullPath nupkg, nugetKey)
             ||> sprintf "nuget push %s -s nuget.org -k %s"
-            |> DotNetCli.RunCommand id)
+            |> DotNetCli.RunCommand (fun c ->
+                                            { c with ToolPath = dotnetExePath }))
 
         // After successful publishing, update the project file
         (versionRegex, projFile) ||> Util.replaceLines (fun line _ ->
@@ -184,6 +198,7 @@ Target "Release" (fun _ ->
 )
 
 "Clean"
+  ==> "InstallDotNetCore"
   ==> "YarnInstall"
   ==> "DotnetRestore"
   ==> "DotnetBuild"
