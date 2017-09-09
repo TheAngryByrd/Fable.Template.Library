@@ -7,6 +7,17 @@
 2. Add your test into `tests` folder. All the tests are run against [mocha](https://www.npmjs.com/package/mocha)
 3. You can now run `build.cmd MochaTest`. This is build the lib for you and run the tests.
 
+### Building
+
+Make sure the following **requirements** are installed in your system:
+
+* [dotnet SDK](https://www.microsoft.com/net/download/core) 2.0 or higher
+* [node.js](https://nodejs.org) 6.11 or higher
+* [yarn](https://yarnpkg.com)
+* [Mono](http://www.mono-project.com/) if you're on Linux or macOS.
+
+Then you just need to type `./build.cmd` or `./build.sh`
+
 ### Release
 
 In order to push your package to [nuget.org][https://nuget.org] you need to add your API keys to `NUGET_KEY` environmental variable.
