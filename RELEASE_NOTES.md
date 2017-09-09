@@ -1,4 +1,4 @@
-#### 0.1.0-alpha006 - 09.09.2017
+#### 0.1.0 - 09.09.2017
 * BREAKING: Rename Project (https://github.com/TheAngryByrd/Fable.Template.Library/pull/8) (https://github.com/TheAngryByrd/Fable.Template.Library/pull/10)
 * BUGFIX: Fix version build when dotnet pack (https://github.com/TheAngryByrd/Fable.Template.Library/pull/12)
 * BUGFIX: Fix Windows build for mocha tests (https://github.com/TheAngryByrd/Fable.Template.Library/pull/18)
