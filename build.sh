@@ -35,11 +35,9 @@ run() {
 }
 
 
-
 run $PAKET_EXE restore
+run $PAKET_EXE restore --group build
 
-[ ! -e build.fsx ] && run $PAKET_EXE update
-[ ! -e build.fsx ] && run $FAKE_EXE init.fsx
 
 # build template
 pushd Content/
@@ -47,7 +45,6 @@ pushd Content/
 ./build.sh Clean
 popd
 
-rm -rf Content/node_modules
-rm -rf Content/packages
+rm -rf Content/node_modules Content/packages Content/paket-files
 
 run $FAKE_EXE "$@" $FSIARGS $FSIARGS2 build.fsx
