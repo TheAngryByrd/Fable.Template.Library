@@ -1,4 +1,4 @@
-# Fable.Library.Template
+# Fable.Template.Library
 F# Template for create and publishing [Fable](https://github.com/fable-compiler/Fable) Libraries
 
 
