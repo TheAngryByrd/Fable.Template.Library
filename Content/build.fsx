@@ -102,15 +102,19 @@ Target "DotnetBuild" (fun _ ->
 ))
 
 
-let fableWebpack workingDir =
+let fableWebpack timeout workingDir webpackArgs  =
     DotNetCli.RunCommand(fun c ->
-        { c with WorkingDir = workingDir
-                 ToolPath = dotnetExePath }
-        ) "fable webpack --port free"
+        { c with
+            TimeOut = timeout
+            WorkingDir = workingDir
+            ToolPath = dotnetExePath }
+        ) (sprintf "fable webpack --port free -- %s" webpackArgs)
 
-let mocha args =
+let mocha timeout args =
     Yarn(fun yarnParams ->
-        { yarnParams with Command = args |> sprintf "run mocha -- %s" |> YarnCommand.Custom }
+        { yarnParams with
+            Timeout =timeout
+            Command = args |> sprintf "run mocha -- %s" |> YarnCommand.Custom }
     )
 
 Target "MochaTest" (fun _ ->
@@ -118,13 +122,29 @@ Target "MochaTest" (fun _ ->
     |> Seq.iter(fun proj ->
         let projDir = proj |> DirectoryName
         //Compile to JS
-        fableWebpack projDir
+        fableWebpack (TimeSpan.FromMinutes(5.)) projDir ""
 
         //Run mocha tests
         let projDirOutput = projDir </> "bin"
-        mocha projDirOutput
+        mocha (TimeSpan.FromMinutes(5.)) projDirOutput
     )
 
+)
+
+Target "WatchTests" (fun _ ->
+    !! testsGlob
+    |> Seq.iter(fun proj ->
+        let projDir = proj |> DirectoryName
+        //Compile to JS
+        async { fableWebpack (TimeSpan.MaxValue) projDir "--watch" } |> Async.Start
+
+        //Run mocha tests
+        let projDirOutput = projDir </> "bin"
+        async { sprintf "--watch %s" projDirOutput |> mocha (TimeSpan.MaxValue) } |> Async.Start
+    )
+
+    printfn "Press enter to exit..."
+    Console.ReadLine() |> ignore
 )
 
 Target "DotnetPack" (fun _ ->
@@ -209,4 +229,8 @@ Target "Release" (fun _ ->
   ==> "Publish"
   ==> "Release"
 
+
+"YarnInstall"
+==> "DotnetRestore"
+==> "WatchTests"
 RunTargetOrDefault "DotnetPack"
