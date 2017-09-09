@@ -18,6 +18,13 @@ Make sure the following **requirements** are installed in your system:
 
 Then you just need to type `./build.cmd` or `./build.sh`
 
+
+### Watch Tests
+
+You can get continuous feedback with using the `WatchTests` target.  This will compile and run your tests everytime.
+
+`./build.sh WatchTests` or `./build.cmd WatchTests`
+
 ### Release
 
 In order to push your package to [nuget.org][https://nuget.org] you need to add your API keys to `NUGET_KEY` environmental variable.
