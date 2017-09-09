@@ -109,7 +109,9 @@ let fableWebpack workingDir =
         ) "fable webpack --port free"
 
 let mocha args =
-    if ProcessHelper.Shell.Exec("./node_modules/.bin/mocha", args ) <> 0 then failwith "Mocha test failed"
+    Yarn(fun yarnParams ->
+        { yarnParams with Command = args |> sprintf "run mocha -- %s" |> YarnCommand.Custom }
+    )
 
 Target "MochaTest" (fun _ ->
     !! testsGlob
