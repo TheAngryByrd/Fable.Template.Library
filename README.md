@@ -13,8 +13,9 @@ dotnet new -i "Fable.Template.Library::*"
 ### Use the new template:
 
 ```
-dotnet new fable-library -n CoolJsBinding
-cd CoolJsBinding
+dotnet new fable-library -n CoolFableLibrary
+cd CoolFableLibrary
+./build.sh
 ```
 
 
