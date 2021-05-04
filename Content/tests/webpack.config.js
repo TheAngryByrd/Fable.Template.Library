@@ -2,22 +2,23 @@ var path = require('path');
 var fs = require('fs');
 
 function resolve(filePath) {
-    return path.resolve(__dirname, filePath)
+    return path.join(__dirname, filePath)
 }
 
 var babelOptions = {
     "presets": [
-        [resolve("../node_modules/babel-preset-es2015"), {
+        [resolve("../node_modules/babel-preset-env"), {
             "modules": false
         }]
     ]
 }
 
 module.exports = {
+    mode: "development", 
     entry: resolve('./Fable.MyLib.Tests.fsproj'),
     output: {
         filename: 'tests.bundle.js',
-        path: resolve('./bin'),
+        path: resolve('./test'),
     },
     target: "node",
     module: {
@@ -33,8 +34,7 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules\/(?!fable)/,
             use: {
-                loader: 'babel-loader',
-                options: babelOptions
+                loader: 'babel-loader'
             },
         }]
     },
