@@ -1,6 +1,6 @@
 {
     "scripts":{
-        "test": "mocha",
+        "test": "mocha --file tests/test/*",
         "build": "webpack -c tests/webpack.config.js"
     },
     "private": true,
