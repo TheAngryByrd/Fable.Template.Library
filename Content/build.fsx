@@ -638,24 +638,6 @@ let githubRelease _ =
     |> GitHub.publishDraft
     |> Async.RunSynchronously
 
-// let formatCode _ =
-//     [
-//         srcCodeGlob
-//         testsCodeGlob
-//     ]
-//     |> Seq.collect id
-//     // Ignore AssemblyInfo
-//     |> Seq.filter(fun f -> f.EndsWith("AssemblyInfo.fs") |> not)
-//     |> formatFilesAsync FormatConfig.FormatConfig.Default
-//     |> Async.RunSynchronously
-//     |> Seq.iter(fun result ->
-//         match result with
-//         | Formatted(original, tempfile) ->
-//             tempfile |> Shell.copyFile original
-//             Trace.logfn "Formatted %s" original
-//         | _ -> ()
-//     )
-
 
 let buildDocs _ =
     DocsTool.build ()
@@ -694,7 +676,6 @@ Target.create "SourceLinkTest" sourceLinkTest
 Target.create "PublishToNuGet" publishToNuget
 Target.create "GitRelease" gitRelease
 Target.create "GitHubRelease" githubRelease
-//Target.create "FormatCode" formatCode
 Target.create "Release" ignore
 Target.create "BuildDocs" buildDocs
 Target.create "WatchDocs" watchDocs
