@@ -1,9 +1,11 @@
 {
+    "$schema": "http://json.schemastore.org/template",
     "author": "Jimmy Byrd",
     "classifications": ["Scaffold"],
-    "name": "Fable.Library.Template",
+    "name": "Fable Library Template",
     "tags": {
-        "language": "F#"
+        "language": "F#",
+        "type": "project"
     },
     "identity": "Fable.Library.Template",
     "shortName": "fable-library",
