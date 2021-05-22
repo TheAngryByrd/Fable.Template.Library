@@ -65,8 +65,7 @@ let distDir = __SOURCE_DIRECTORY__  @@ "dist"
 let distGlob = distDir @@ "*.nupkg"
 
 let coverageThresholdPercent = 80
-let coverageReportDir =  __SOURCE_DIRECTORY__  @@ "docs" @@ "coverage"
-
+let coverageReportDir =  __SOURCE_DIRECTORY__  @@ "coverage"
 
 let docsDir = __SOURCE_DIRECTORY__  @@ "docs"
 let docsSrcDir = __SOURCE_DIRECTORY__  @@ "docsSrc"
@@ -638,9 +637,6 @@ Target.create "PublishToNuGet" publishToNuget
 Target.create "GitRelease" gitRelease
 Target.create "GitHubRelease" githubRelease
 Target.create "Release" ignore
-Target.create "BuildDocs" buildDocs
-Target.create "WatchDocs" watchDocs
-Target.create "ReleaseDocs" releaseDocs
 
 //-----------------------------------------------------------------------------
 // Target Dependencies
@@ -663,12 +659,6 @@ Target.create "ReleaseDocs" releaseDocs
 "DotnetRestore" ?=> "UpdateChangelog"
 "UpdateChangelog" ?=> "GenerateAssemblyInfo"
 "UpdateChangelog" ==> "PublishToNuGet"
-
-"BuildDocs" ==> "ReleaseDocs"
-"BuildDocs" ?=> "PublishToNuget"
-"DotnetPack" ?=> "BuildDocs"
-"GenerateCoverageReport" ?=> "ReleaseDocs"
-
 
 "DotnetRestore"
     ==> "DotnetBuild"
