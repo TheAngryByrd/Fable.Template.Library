@@ -6,11 +6,7 @@ function resolve(filePath) {
 }
 
 var babelOptions = {
-    "presets": [
-        [resolve("../node_modules/babel-preset-env"), {
-            "modules": false
-        }]
-    ]
+    "presets": [ "@babel/preset-env" ]
 }
 
 module.exports = {

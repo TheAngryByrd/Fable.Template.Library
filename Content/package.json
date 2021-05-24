@@ -6,8 +6,8 @@
     "private": true,
     "devDependencies": {
         "@babel/core": "^7.14.0",
+        "@babel/preset-env": "^7.14.2",
         "babel-loader": "^8.2.2",
-        "babel-preset-env": "^1.7.0",
         "fable-compiler": "^2.13.0",
         "fable-loader": "^2.1.9",
         "isomorphic-fetch": "^3.0.0",
