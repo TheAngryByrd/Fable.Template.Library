@@ -1,9 +1,11 @@
 {
+    "$schema": "http://json.schemastore.org/template",
     "author": "Jimmy Byrd",
-    "classifications": ["Scaffold"],
-    "name": "Fable.Library.Template",
+    "classifications": ["Scaffold", "Fable"],
+    "name": "Fable Library Template",
     "tags": {
-        "language": "F#"
+        "language": "F#",
+        "type": "project"
     },
     "identity": "Fable.Library.Template",
     "shortName": "fable-library",
@@ -15,5 +17,21 @@
             "type": "parameter",
             "replaces": "MyGithubUsername"
         }
-    }
+    },
+    "postActions": [
+        {
+            "condition": "(OS != \"Windows_NT\")",
+            "description": "Make scripts executable",
+            "manualInstructions": [
+                {
+                    "text": "Run 'chmod +x *.sh'"
+                }
+            ],
+            "actionId": "cb9a6cf3-4f5c-4860-b9d2-03a574959774",
+            "args": {
+                "+x": "*.sh"
+            },
+            "continueOnError": true
+        }
+    ]
 }
