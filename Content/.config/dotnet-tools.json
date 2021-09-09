@@ -19,6 +19,12 @@
       "commands": [
         "fake"
       ]
+    },
+    "fsharp-analyzers": {
+      "version": "0.8.0",
+      "commands": [
+        "fsharp-analyzers"
+      ]
     }
   }
 }
